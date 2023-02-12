@@ -15,13 +15,9 @@
   flex-direction: column;
   gap: 40px;
 }
-.logo {
-  padding: 7px 35px;
-  background: #ff47ca;
-  border-radius: 5px;
-  text-decoration: none;
-  text-transform: uppercase;
-  color: #000;
+.logoBlock {
+  display: flex;
+  align-items: center;
 }
 .footerLinks {
   display: flex;
@@ -42,5 +38,11 @@
   .footer .container {
     padding: 30px 0px;
     gap: 30px;
+  }
+}
+@media (max-width: 280px) {
+  .footer .container {
+    padding: 20px 0px;
+    gap: 25px;
   }
 }

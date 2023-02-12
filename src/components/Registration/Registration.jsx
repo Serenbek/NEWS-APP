@@ -3,9 +3,21 @@ import { Button, FormControl, TextField, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { API } from "../../api";
-// import { FullscreenExit } from "@mui/icons-material";
+import IconButton from "@mui/material/IconButton";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputAdornment from "@mui/material/InputAdornment";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { ReactComponent as Logo } from "./images/logov2.svg";
+import { toast } from 'react-toastify';
 
 function Registration() {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword2, setShowPassword2] = useState(false);
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const handleClickShowPassword2 = () => setShowPassword2((show) => !show);
+
   const [data, setData] = useState({
     nickname: "",
     name: "",
@@ -44,7 +56,7 @@ function Registration() {
     const info = await response.json();
     console.log(info);
     if (info) {
-      alert("User was created");
+      toast.success("Пользователь успешно создан");
     }
   };
 
@@ -52,8 +64,8 @@ function Registration() {
     <>
       <div className={styles.container}>
         <div className={styles.forCentr}>
-          <Link className={styles.logo} to="#">
-            Your Logo
+          <Link to="/newsPage">
+            <Logo className={styles.logo} />
           </Link>
         </div>
         <div className={styles.avatar}>
@@ -114,7 +126,28 @@ function Registration() {
           </Typography>
           <div className={styles.pass1}>
             <FormControl>
-              <TextField
+              <OutlinedInput
+                id="outlined-adornment-password"
+                type={showPassword ? "text" : "password"}
+                size="small"
+                name="password"
+                value={data.password}
+                onChange={onChangeInfo}
+                className={styles.passworInput}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+              />
+
+              {/* <TextField
                 id="outlined-passwordEnt2"
                 type="password"
                 autoComplete="current-password"
@@ -122,7 +155,7 @@ function Registration() {
                 name="password"
                 value={data.password}
                 onChange={onChangeInfo}
-              />
+              /> */}
             </FormControl>
             <div className={styles.limitSim}>
               <Typography variant="subtitle1" component="p">
@@ -136,7 +169,28 @@ function Registration() {
             Подтверждение пароля
           </Typography>
           <FormControl>
-            <TextField
+            <OutlinedInput
+              id="outlined-adornment-password"
+              type={showPassword2 ? "text" : "password"}
+              size="small"
+              name="password2"
+              value={data.password2}
+              onChange={onChangeInfo}
+              className={styles.passworInput2}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword2}
+                    edge="end"
+                  >
+                    {showPassword2 ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
+            />
+
+            {/* <TextField
               id="outlined-passwordEnt3"
               type="password"
               autoComplete="current-password"
@@ -144,7 +198,7 @@ function Registration() {
               name="password2"
               value={data.password2}
               onChange={onChangeInfo}
-            />
+            /> */}
           </FormControl>
         </div>
         <div className={styles.forCentr}>

@@ -15,8 +15,7 @@
   justify-content: center;
 }
 .searchIcon,
-.accountCircleRoundedIcon,
-.menuRoundedIcon {
+.accountCircleRoundedIcon {
   color: #fff !important;
   cursor: pointer;
 }
@@ -28,13 +27,9 @@
   justify-content: space-between;
   padding-bottom: 30px;
 }
-.logo {
-  padding: 7px 35px;
-  background: #ff47ca;
-  border-radius: 5px;
-  text-decoration: none;
-  text-transform: uppercase;
-  color: #000;
+.logoBlock {
+  display: flex;
+  align-items: center;
 }
 .headerRightContent {
   display: flex;
@@ -60,5 +55,11 @@
   .header .headerTitle {
     margin-top: 20px;
     font-size: 52px;
+  }
+  .logo {
+    width: 90px;
+  }
+  .headerRightContent {
+    gap: 15px;
   }
 }

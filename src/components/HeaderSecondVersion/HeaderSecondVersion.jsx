@@ -1,37 +1,35 @@
-import styles from "./Header.module.css";
+import styles from "./HeaderSecondVersion.module.css";
 import SearchIcon from "@mui/icons-material/Search";
 import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
-import { Typography } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import FavoriteIconMenu from "../FavoriteIconMenu/FavoriteIconMenu";
-import { ReactComponent as Logo } from "./images/logov3.svg";
+import { ReactComponent as Logo } from "./images/logov2.svg";
 
-function Header() {
+function HeaderSecondVersion() {
   const navigate = useNavigate();
+
   return (
     <>
-      <header className={styles.header}>
-        <div className={styles.container}>
+      <div className={styles.container}>
+        <header>
           <div className={styles.logoBlock}>
             <Link to="/newsPage">
               <Logo className={styles.logo}/>
             </Link>
           </div>
           <div className={styles.headerRightContent}>
-            <SearchIcon className={styles.searchIcon} />
+            <SearchIcon className={styles.searchIcon} color="primary" />
             <AccountCircleRoundedIcon
               className={styles.accountCircleRoundedIcon}
+              color="primary"
               onClick={() => navigate("/userPage")}
             />
-            <FavoriteIconMenu color="#fff"/>
+            <FavoriteIconMenu color="#7e5bc2"/>
           </div>
-        </div>
-        <Typography className={styles.headerTitle} variant="h1" component="h1">
-          Новости
-        </Typography>
-      </header>
+        </header>
+      </div>
     </>
   );
 }
 
-export default Header;
+export default HeaderSecondVersion;

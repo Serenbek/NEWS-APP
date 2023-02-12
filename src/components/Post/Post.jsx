@@ -10,26 +10,29 @@ import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import Favorite from "@mui/icons-material/Favorite";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import DeleteIcon from "@mui/icons-material/Delete";
-import notIcon from "../Post/images/notIconImage.png"
+import notIcon from "../Post/images/notIconImage.png";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
-function Post({ title, text, image, id, show }) {
+function Post({ title, text, image, id, show, isLiked, putLike, deletePost }) {
   return (
     <>
       <Card className={styles.CardMainContent}>
         <div className={styles.imgContent}>
           <div className={styles.cardImageBlock}>
-            {
-              image ?
-               <img
+            {image ? (
+              <img
                 className={styles.cardImage}
                 src={`https://megalab.pythonanywhere.com/${image}`}
                 alt=""
               />
-              :
-              <img src={notIcon} alt="notIconImage" className={styles.notIcon}/>
-            }
+            ) : (
+              <img
+                src={notIcon}
+                alt="notIconImage"
+                className={styles.notIcon}
+              />
+            )}
           </div>
         </div>
         <div className={styles.textContent}>
@@ -42,12 +45,16 @@ function Post({ title, text, image, id, show }) {
               September 14, 2016
             </Typography>
             {show === "myPage" ? (
-              <DeleteIcon className={styles.trashIcon} />
+              <DeleteIcon
+                className={styles.trashIcon}
+                onClick={() => deletePost(id)}
+              />
             ) : (
               <Checkbox
                 {...label}
-                icon={<FavoriteBorder />}
-                checkedIcon={<Favorite />}
+                onClick={() => putLike(id)}
+                icon={isLiked ? <Favorite color="error" /> : <FavoriteBorder />}
+                checkedIcon={<Favorite color="error" />}
               />
             )}
           </div>
@@ -64,7 +71,7 @@ function Post({ title, text, image, id, show }) {
               component="p"
               className={styles.textContentText}
             >
-              {text}
+              {text.length > 120 ? `${text.substr(0, 120)}...` : text}
             </Typography>
             <Link to={`${id}`} className={styles.readMore}>
               Читать дальше <ArrowRightAltIcon fontSize="small" />

@@ -1,28 +1,34 @@
 .container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   max-width: 30%;
-  margin: 5% auto;
   box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.14);
-  border-radius: 15px;
+  background-color: white;
   padding: 25px 50px;
+  border-radius: 15px;
 }
-.avatar,
-.nickEnt,
-.passEnt,
-.passEnt2,
-.firNameEnt,
-.lastNameEnt {
+.newsCoverBlock,
+.titleBlock,
+.shortDescBlock,
+.textBlock,
+.selectBlock {
   display: flex;
   justify-content: space-between;
 
   margin: 20px 0;
   gap: 30px;
 }
+.multiline {
+  width: 223px;
+}
+.select {
+  width: 223px;
+}
 .pass1 {
   display: flex;
   flex-direction: column;
-}
-.passworInput, .passworInput2 {
-  width: 223px;
 }
 .container .passEnt {
   margin-bottom: 0px;
@@ -32,10 +38,6 @@
 }
 .firNameEnt {
   margin-top: 37px;
-}
-.limitSim p {
-  color: #5a5a5a;
-  font-size: 12px;
 }
 .forCentr {
   display: flex;
@@ -72,35 +74,30 @@
     max-width: 60%;
   }
 }
-@media (max-width: 855px) {
-  .container {
-    max-width: 70%;
-  }
-}
-@media (max-width: 730px) {
-  .container {
-    max-width: 80%;
-  }
-}
-@media (max-width: 640px) {
+@media (max-width: 980px) {
   .container {
     max-width: 95%;
-    margin: 5% 2%;
-    padding: 15px 25px;
+    margin: 1% 0.5%;
   }
-  .avatar,
-  .nickEnt,
-  .passEnt,
-  .passEnt2,
-  .firNameEnt,
-  .lastNameEnt {
+  .newsCoverBlock,
+  .titleBlock,
+  .shortDescBlock,
+  .textBlock,
+  .selectBlock {
     flex-direction: column;
     gap: 0;
   }
-  .limitSim p {
-    margin: 0;
+  .multiline,
+  .select {
+    width: 336px;
   }
-  .passworInput, .passworInput2 {
-    width: 100%;
+}
+@media (max-width: 470px) {
+  .container {
+    padding: 10px 25px;
+  }
+  .multiline,
+  .select {
+    max-width: 100%;
   }
 }

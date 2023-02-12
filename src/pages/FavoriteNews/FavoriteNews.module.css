@@ -1,0 +1,38 @@
+.container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 30px 0;
+}
+.myPosts .noPosts {
+  text-align: center;
+}
+.favoriteTitleMain {
+  margin: 40px 0;
+}
+.favoriteTitleMain .favoriteTitle {
+  font-weight: bold;
+  font-size: 48px;
+  line-height: 55px;
+  color: #000000;
+}
+@media (max-width: 768px) {
+  .favoriteTitleMain .favoriteTitle {
+    text-align: center;
+  }
+  .favoriteTitleMain {
+    margin: 30px 0;
+  }
+}
+@media (max-width: 610px) {
+  .favoriteTitleMain .favoriteTitle {
+    text-align: center;
+    font-size: 38px;
+  }
+}
+@media (max-width: 475px) {
+  .favoriteTitleMain .favoriteTitle {
+    text-align: center;
+    font-size: 30px;
+    line-height: 35px;
+  }
+}

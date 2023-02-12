@@ -1,0 +1,27 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.headerRightContent {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+.logoBlock {
+  display: flex;
+  align-items: center;
+}
+.searchIcon,
+.accountCircleRoundedIcon {
+  color: #7e5bc2 !important;
+  cursor: pointer;
+}
+@media (max-width: 365px) {
+  .logo {
+    width: 90px;
+  }
+  .headerRightContent {
+    gap: 15px;
+  }
+}

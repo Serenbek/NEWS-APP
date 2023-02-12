@@ -3,8 +3,19 @@ import { Button, FormControl, TextField, Typography } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { API } from "../../api";
+import IconButton from "@mui/material/IconButton";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputAdornment from "@mui/material/InputAdornment";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { ReactComponent as Logo } from "./images/logov2.svg";
+import { toast } from 'react-toastify';
 
 function Login() {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
   useEffect(() => {
@@ -24,7 +35,7 @@ function Login() {
   };
   const onSubmit = async () => {
     if (data.nickname && data.password === "") {
-      alert("Enter your nickname or password");
+      toast.error("Введите никнейм или пароль");
       return;
     }
     const response = await fetch(API.users.login, {
@@ -39,15 +50,15 @@ function Login() {
       localStorage.setItem("token", result.token);
       navigate("/NewsPage");
     } else {
-      alert("Incorrect nickname or password");
+      toast.error("Неправильный никнейм или пароль");
     }
   };
   // console.log(data);
   return (
     <div className={styles.container}>
       <div className={styles.forCentr}>
-        <Link className={styles.logo} to="#">
-          Your Logo
+        <Link to="#">
+          <Logo className={styles.logo}/>
         </Link>
       </div>
       <div className={styles.nickEnt}>
@@ -68,7 +79,28 @@ function Login() {
           Пароль
         </Typography>
         <FormControl>
-          <TextField
+          <OutlinedInput
+            id="outlined-adornment-password"
+            type={showPassword ? "text" : "password"}
+            size="small"
+            name="password"
+            value={data.password}
+            onChange={onChange}
+            className={styles.passworInput}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
+          />
+
+          {/* <TextField
             id="outlined-passwordEnt"
             type="password"
             autoComplete="current-password"
@@ -76,7 +108,7 @@ function Login() {
             name="password"
             value={data.password}
             onChange={onChange}
-          />
+          /> */}
         </FormControl>
       </div>
       <div className={styles.forCentr}>

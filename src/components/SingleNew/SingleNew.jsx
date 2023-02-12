@@ -22,7 +22,7 @@ function SingleNew() {
   const navigate = useNavigate();
   useEffect(() => {
     if (!token) {
-      navigate("/login");
+      navigate("/");
     } else {
       getSengleNew();
     }
@@ -85,7 +85,11 @@ function SingleNew() {
                 alt=""
               />
             ) : (
-              <img src={notIcon} alt="noyIconImage" className={styles.notIconImage} />
+              <img
+                src={notIcon}
+                alt="noyIconImage"
+                className={styles.notIconImage}
+              />
             )}
           </div>
           <>{singleNew.text}</>
@@ -102,17 +106,17 @@ function SingleNew() {
             Комментарии
           </Typography>
           <div className={styles.commentsInner}>
-            {/* <Typography
-              variant="p"
-              component="p"
-              className={styles.commentNickname}
-            >
-              <>
-                {singleNew.comment[0].user.nickname
-                  ? singleNew.comment[0].user.nickname
-                  : ""}
-              </>
-            </Typography> */}
+            {/* {singleNew.comment[0] ? (
+              <Typography
+                variant="p"
+                component="p"
+                className={styles.commentNickname}
+              >
+                {singleNew.comment[0].user.nickname}
+              </Typography>
+            ) : (
+              ""
+            )} */}
             {/* <Typography
               variant="p"
               component="p"

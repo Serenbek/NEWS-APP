@@ -1,8 +1,5 @@
 import styles from "./UserPage.module.css";
-import SearchIcon from "@mui/icons-material/Search";
-import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
-import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import UserIcon from "../UserPage/images/image.png";
 import { Button, TextField, Typography } from "@mui/material";
 import { API } from "../../api";
@@ -10,8 +7,12 @@ import { useEffect, useState } from "react";
 import Footer from "../Footer/Footer";
 import Post from "../Post/Post";
 import DeleteIcon from "@mui/icons-material/Delete";
+import ModalCreatePost from "../ModalCreatePost/ModalCreatePost";
+import HeaderSecondVersion from "../HeaderSecondVersion/HeaderSecondVersion";
+import { toast } from "react-toastify";
 
 function UserPage() {
+  const token = localStorage.getItem("token");
   const [data, setData] = useState({
     name: "",
     last_name: "",
@@ -19,13 +20,19 @@ function UserPage() {
     profile_image: "",
   });
 
+  const [open, setOpen] = useState(false);
+
   const [list, setList] = useState([]);
 
-  useEffect(() => {
-    getUser();
-  }, []);
-
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!token) {
+      navigate("/");
+    } else {
+      getUser();
+    }
+  }, []);
 
   const submitData = async () => {
     let formData = new FormData();
@@ -89,25 +96,26 @@ function UserPage() {
       setList(list);
     }
   };
+
+  const deletePost = async (id) => {
+    const response = await fetch(`${API.posts.newsList}${id}/`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Token ${localStorage.getItem("token")}`,
+      },
+    });
+    if (response.status === 204) {
+      getUser();
+      toast.success("Успешно удалено");
+    } else {
+      toast.error("Ошибка удаления");
+    }
+  };
   return (
     <>
       <div className={styles.container}>
-        <header>
-          <div className={styles.logoBlock}>
-            <Link className={styles.logo} to="/newsPage">
-              Your Logo
-            </Link>
-          </div>
-          <div className={styles.headerRightContent}>
-            <SearchIcon className={styles.searchIcon} color="primary" />
-            <AccountCircleRoundedIcon
-              className={styles.accountCircleRoundedIcon}
-              color="primary"
-              onClick={() => navigate("/userPage")}
-            />
-            <MenuRoundedIcon className={styles.menuRoundedIcon} />
-          </div>
-        </header>
+        <ModalCreatePost open={open} setOpen={setOpen} />
+        <HeaderSecondVersion />
         <section className={styles.contentMainBlock}>
           <div className={styles.contentFirstBlock}>
             {data.profile_image ? (
@@ -199,6 +207,24 @@ function UserPage() {
             </div>
           </div>
         </section>
+        <section className={styles.blockCreate}>
+          <Typography
+            variant="h3"
+            component="h3"
+            className={styles.blockCreateTitle}
+          >
+            Мои публикации
+          </Typography>
+          <div className={styles.buttonMain}>
+            <Button
+              variant="contained"
+              size="small"
+              onClick={() => setOpen(true)}
+            >
+              Новая публикация
+            </Button>
+          </div>
+        </section>
         <div className={styles.myPosts}>
           {list.length > 0 ? (
             list.map((item) => (
@@ -208,6 +234,7 @@ function UserPage() {
                 text={item.text}
                 title={item.title}
                 id={item.id}
+                deletePost={deletePost}
                 show="myPage"
               />
             ))

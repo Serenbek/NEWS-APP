@@ -5,14 +5,6 @@
   border-radius: 15px;
   padding: 25px 50px;
 }
-.logo {
-  padding: 7px 35px;
-  background: #ff47ca;
-  border-radius: 5px;
-  text-decoration: none;
-  text-transform: uppercase;
-  color: #000;
-}
 .nickEnt,
 .passEnt {
   display: flex;
@@ -23,6 +15,9 @@
 }
 .nickEnt {
   margin-top: 37px;
+}
+.passworInput {
+  width: 223px;
 }
 .forCentr {
   display: flex;
@@ -72,7 +67,8 @@
 @media (max-width: 525px) {
   .container {
     max-width: 95%;
-    margin: 10% 2%;
+    margin: 15% 2%;
+    padding: 15px 25px;
   }
   .nickEnt,
   .passEnt {
@@ -81,5 +77,8 @@
   }
   p {
     text-align: left;
+  }
+  .passworInput {
+    width: 100%;
   }
 }
