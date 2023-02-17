@@ -1,0 +1,122 @@
+.container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 30px 0;
+}
+.CardMainContent {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.textContentTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.cardImageBlock {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 25px 0;
+}
+.cardImage,
+.notIconImage {
+  height: 555px;
+  width: 845px;
+  background-position: center center;
+  border-radius: 8px;
+  padding: 5px;
+}
+.CardMainContent .shareIcon {
+  align-self: flex-start;
+  margin: 30px 0;
+}
+.regLink {
+  color: #000;
+}
+.singleNewTitle .title {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 25px;
+}
+.textContentTopDate,
+.shortDesc {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: #858080;
+}
+.comments .commentsTitle {
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 28px;
+}
+.commentsBlock {
+  margin: 25px 0 10px 0;
+}
+.commentsBlock .commentNickname {
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 21px;
+  margin-bottom: 7px;
+}
+.commentsBlock .commentText {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: #858080;
+  margin-bottom: 7px;
+}
+.commentsBlock .replyBlock {
+  display: flex;
+  align-items: center;
+}
+.commentsBlock .replyBtn {
+  padding: 2px 10px;
+  border-radius: 10px;
+  color: #7e5bc2;
+  background: #efeef0;
+  text-transform: none;
+  margin: 0 5px;
+}
+.commentsBlock .replyBtn:hover {
+  color: #fff;
+  background: #623dac;
+  transition: 0.7s;
+}
+.commentsBlock .replyBlockReply {
+  margin: 25px 0 0 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.replyBlockReplyVisible {
+  margin: 25px 0 0 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.replyBlockReplyVisible .replyBtn2,
+.replyBlockReply .replyBtn2 {
+  color: #fff;
+  height: 30px;
+  background: #7e5bc2;
+  border-radius: 10px;
+  text-transform: none;
+}
+.replyBlockReplyVisible .replyBtn2:hover,
+.replyBlockReply .replyBtn2:hover {
+  background: #623dac;
+}
+.commentsBlockChild {
+  margin: 25px 0 10px 100px;
+}
+@media (max-width: 900px) {
+  .cardImage {
+    width: 100%;
+    height: 50%;
+  }
+}

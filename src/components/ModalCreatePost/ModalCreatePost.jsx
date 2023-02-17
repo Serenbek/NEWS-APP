@@ -70,10 +70,10 @@ function ModalCreatePost({ open, setOpen }) {
     // const info = await response.json();
     // console.log(info);
     if (response.status === 201) {
-      navigate("userPage")
+      navigate("/userPage")
       toast.success("Пост успешно создан");
     } else {
-      toast.error("Пост не создан");
+      toast.error("Произошла ошибка при создании поста");
     }
   };
   return (

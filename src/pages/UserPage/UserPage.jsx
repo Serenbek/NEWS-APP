@@ -4,11 +4,11 @@ import UserIcon from "../UserPage/images/image.png";
 import { Button, TextField, Typography } from "@mui/material";
 import { API } from "../../api";
 import { useEffect, useState } from "react";
-import Footer from "../Footer/Footer";
-import Post from "../Post/Post";
+import Footer from "../../components/Footer/Footer";
+import Post from "../../components/Post/Post";
 import DeleteIcon from "@mui/icons-material/Delete";
-import ModalCreatePost from "../ModalCreatePost/ModalCreatePost";
-import HeaderSecondVersion from "../HeaderSecondVersion/HeaderSecondVersion";
+import ModalCreatePost from "../../components/ModalCreatePost/ModalCreatePost";
+import HeaderSecondVersion from "../../components/HeaderSecondVersion/HeaderSecondVersion";
 import { toast } from "react-toastify";
 
 function UserPage() {
@@ -51,7 +51,7 @@ function UserPage() {
     const info = await response.json();
     console.log(info);
     if (info) {
-      alert("User was successfully changed");
+      toast.success("Изменения применены");
     }
   };
 
@@ -106,9 +106,9 @@ function UserPage() {
     });
     if (response.status === 204) {
       getUser();
-      toast.success("Успешно удалено");
+      toast.success("Пост был успешно удалён");
     } else {
-      toast.error("Ошибка удаления");
+      toast.error("Ошибка удаления поста");
     }
   };
   return (
