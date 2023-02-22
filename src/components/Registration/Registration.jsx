@@ -9,7 +9,8 @@ import InputAdornment from "@mui/material/InputAdornment";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { ReactComponent as Logo } from "./images/logov2.svg";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
+import UploadIcon from "@mui/icons-material/Upload";
 
 function Registration() {
   const [showPassword, setShowPassword] = useState(false);
@@ -72,6 +73,13 @@ function Registration() {
           <Typography variant="subtitle1" component="p">
             Выберите аватар
           </Typography>
+          <label for="outlined-basic">
+            <UploadIcon
+              color="primary"
+              className={styles.chooseFailIcon}
+              fontSize="medium"
+            />
+          </label>
           <TextField
             className={styles.chooseFail}
             id="outlined-basic"

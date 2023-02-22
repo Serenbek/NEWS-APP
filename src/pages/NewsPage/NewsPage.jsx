@@ -13,7 +13,7 @@ import ReactPaginate from "react-paginate";
 
 function NewsPage() {
   const token = localStorage.getItem("token");
-  const [newsList, setNewList] = useState([]);
+  const [newsList, setNewsList] = useState([]);
   const [tags, setTags] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
@@ -47,9 +47,10 @@ function NewsPage() {
     });
     const list = await response.json();
     if (list) {
-      setNewList(list);
+      setNewsList(list);
     }
   };
+  console.log(newsList);
 
   const putLike = async (id) => {
     const response = await fetch(API.posts.likeList, {

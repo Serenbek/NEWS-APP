@@ -7,8 +7,6 @@ import MenuItem from "@mui/material/MenuItem";
 import Logout from "@mui/icons-material/Logout";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Tooltip from "@mui/material/Tooltip";
-import Button from "@mui/material/Button";
-import Fade from "@mui/material/Fade";
 
 function FavoriteIconMenu({ color }) {
   const navigate = useNavigate();
@@ -27,6 +25,11 @@ function FavoriteIconMenu({ color }) {
   const handleNavigateProfile = () => {
     navigate("/userPage");
   };
+  const handleLogOut = () => {
+    localStorage.removeItem("token")
+    navigate("/")
+  }
+
   return (
     <>
       {/* <Tooltip title="Menu">
@@ -116,7 +119,7 @@ function FavoriteIconMenu({ color }) {
         >
           <MenuItem onClick={handleNavigateProfile}>Мой профиль</MenuItem>
           <MenuItem onClick={handleNavigate}>Избранные новости</MenuItem>
-          <MenuItem onClick={handleClose}>
+          <MenuItem onClick={handleLogOut}>
             <ListItemIcon>
               <Logout fontSize="small" />
             </ListItemIcon>

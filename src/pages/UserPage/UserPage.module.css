@@ -52,9 +52,16 @@ header {
 .editAvatar {
   display: flex;
   gap: 10px;
+  margin-top: 15px;
 }
 .addMain {
   display: flex;
+}
+.chooseFailIcon {
+  cursor: pointer !important;
+}
+.chooseFail {
+  display: none !important;
 }
 .editAvatar .addDeleteBtns {
   text-align: center;

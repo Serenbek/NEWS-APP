@@ -8,8 +8,22 @@
   background-color: white;
   padding: 25px 50px;
   border-radius: 15px;
+  position: relative;
 }
-.newsCoverBlock,
+.closeIcon {
+  position: absolute;
+  top: 0;
+  right: -30px;
+  border-radius: 5px;
+  color: #fff;
+  background-color: #989898;
+  cursor: pointer;
+}
+.newsCoverBlock {
+  display: flex;
+  margin: 30px 0;
+  gap: 15px;
+}
 .titleBlock,
 .shortDescBlock,
 .textBlock,
@@ -19,6 +33,12 @@
 
   margin: 20px 0;
   gap: 30px;
+}
+.chooseFailIcon {
+  cursor: pointer;
+}
+.chooseFail {
+  display: none !important;
 }
 .multiline {
   width: 223px;

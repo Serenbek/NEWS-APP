@@ -1,11 +1,15 @@
 .container {
   max-width: 30%;
-  margin: 5% auto;
+  margin:3% auto;
   box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.14);
   border-radius: 15px;
   padding: 25px 50px;
 }
-.avatar,
+.avatar {
+  display: flex;
+  margin: 30px 0;
+  gap: 15px;
+}
 .nickEnt,
 .passEnt,
 .passEnt2,
@@ -16,6 +20,12 @@
 
   margin: 20px 0;
   gap: 30px;
+}
+.chooseFail {
+  display: none !important;
+}
+.chooseFailIcon {
+  cursor: pointer;
 }
 .pass1 {
   display: flex;

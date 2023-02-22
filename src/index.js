@@ -9,14 +9,17 @@ import SingleNew from "./pages/SingleNew/SingleNew";
 import UserPage from "./pages/UserPage/UserPage";
 import { Route, Routes } from "react-router-dom";
 import FavoriteNews from "./pages/FavoriteNews/FavoriteNews";
-import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+import { Provider } from "react-redux";
+import { store } from "./Redux/store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   // <React.StrictMode>
-  <BrowserRouter>
-    <Routes>
+  <Provider store={store}>
+    <BrowserRouter>
+      <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
         <Route path="/newsPage" element={<NewsPage />} />
@@ -24,7 +27,8 @@ root.render(
         <Route path="/userPage" element={<UserPage />} />
         <Route path="/favoriteNews" element={<FavoriteNews />} />
       </Routes>
-      <ToastContainer/>
-  </BrowserRouter>
+      <ToastContainer />
+    </BrowserRouter>
+  </Provider>
   // </React.StrictMode>
 );

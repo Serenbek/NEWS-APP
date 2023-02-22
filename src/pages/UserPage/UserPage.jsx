@@ -10,6 +10,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import ModalCreatePost from "../../components/ModalCreatePost/ModalCreatePost";
 import HeaderSecondVersion from "../../components/HeaderSecondVersion/HeaderSecondVersion";
 import { toast } from "react-toastify";
+import UploadIcon from "@mui/icons-material/Upload";
 
 function UserPage() {
   const token = localStorage.getItem("token");
@@ -138,6 +139,13 @@ function UserPage() {
                 >
                   Добавить фото
                 </Typography>
+                <label for="outlined-basic">
+                  <UploadIcon
+                    color="primary"
+                    className={styles.chooseFailIcon}
+                    fontSize="medium"
+                  />
+                </label>
                 <TextField
                   className={styles.chooseFail}
                   id="outlined-basic"

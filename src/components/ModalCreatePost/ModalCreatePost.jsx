@@ -13,6 +13,8 @@ import { API } from "../../api";
 import Modal from "@mui/material/Modal";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import CloseIcon from "@mui/icons-material/Close";
+import UploadIcon from "@mui/icons-material/Upload";
 
 function ModalCreatePost({ open, setOpen }) {
   const [tags, setTags] = useState([]);
@@ -70,7 +72,7 @@ function ModalCreatePost({ open, setOpen }) {
     // const info = await response.json();
     // console.log(info);
     if (response.status === 201) {
-      navigate("/userPage")
+      navigate("/userPage");
       toast.success("Пост успешно создан");
     } else {
       toast.error("Произошла ошибка при создании поста");
@@ -80,15 +82,25 @@ function ModalCreatePost({ open, setOpen }) {
     <>
       <Modal
         open={open}
-        onClose={() => setOpen(false)}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <div className={styles.container}>
+          <CloseIcon
+            className={styles.closeIcon}
+            onClick={() => setOpen(false)}
+          />
           <div className={styles.newsCoverBlock}>
             <Typography variant="subtitle1" component="p">
               Обложка новости
             </Typography>
+            <label for="outlined-basic">
+              <UploadIcon
+                color="primary"
+                className={styles.chooseFailIcon}
+                fontSize="medium"
+              />
+            </label>
             <TextField
               className={styles.chooseFail}
               id="outlined-basic"
@@ -116,7 +128,7 @@ function ModalCreatePost({ open, setOpen }) {
               Краткое описание
             </Typography>
             <TextField
-              id="outlined-basic"
+              id="outlined-basic2"
               variant="outlined"
               size="small"
               name="short_desc"
