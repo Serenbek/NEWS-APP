@@ -10,17 +10,25 @@ import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import { toast } from "react-toastify";
 import ReactPaginate from "react-paginate";
+import { useDispatch, useSelector } from "react-redux";
+import { getNewsListFunction } from "../../Redux/newsSlice";
 
 function NewsPage() {
-  const token = localStorage.getItem("token");
-  const [newsList, setNewsList] = useState([]);
+  // const token = localStorage.getItem("token");
+  const token = useSelector((state) => state.token.token);
+  console.log(token);
+  // const [newsList, setNewsList] = useState([]);
+  const newsList = useSelector((state) => state.news.newsList);
+  console.log(newsList);
   const [tags, setTags] = useState([]);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   useEffect(() => {
     if (!token) {
       navigate("/");
     } else {
-      getAllNews();
+      // getAllNews();
+      dispatch(getNewsListFunction({token}))
       getAllTags();
     }
   }, []);
@@ -29,7 +37,7 @@ function NewsPage() {
     const response = await fetch(API.posts.tagList, {
       method: "GET",
       headers: {
-        Authorization: `Token ${localStorage.getItem("token")}`,
+        Authorization: `Token ${token}`,
       },
     });
     const list = await response.json();
@@ -38,25 +46,25 @@ function NewsPage() {
     }
   };
 
-  const getAllNews = async () => {
-    const response = await fetch(API.posts.newsList, {
-      method: "GET",
-      headers: {
-        Authorization: `Token ${localStorage.getItem("token")}`,
-      },
-    });
-    const list = await response.json();
-    if (list) {
-      setNewsList(list);
-    }
-  };
-  console.log(newsList);
+  // const getAllNews = async () => {
+  //   const response = await fetch(API.posts.newsList, {
+  //     method: "GET",
+  //     headers: {
+  //       Authorization: `Token ${localStorage.getItem("token")}`,
+  //     },
+  //   });
+  //   const list = await response.json();
+  //   if (list) {
+  //     setNewsList(list);
+  //   }
+  // };
+  // console.log(newsList);
 
   const putLike = async (id) => {
     const response = await fetch(API.posts.likeList, {
       method: "POST",
       headers: {
-        Authorization: `Token ${localStorage.getItem("token")}`,
+        Authorization: `Token ${token}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ post: id }),

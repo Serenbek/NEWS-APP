@@ -9,14 +9,17 @@ import InputAdornment from "@mui/material/InputAdornment";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { ReactComponent as Logo } from "./images/logov2.svg";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { getTokenFunction } from "../../Redux/tokenSlice";
 
 function Login() {
+  const token = useSelector((state) => state.token.token);
+  const dispatch = useDispatch();
+
   const [showPassword, setShowPassword] = useState(false);
-
   const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-  const token = localStorage.getItem("token");
+  // const token = localStorage.getItem("token");
   const navigate = useNavigate();
   useEffect(() => {
     if (token) {
@@ -38,27 +41,14 @@ function Login() {
       toast.error("Введите никнейм или пароль");
       return;
     }
-    const response = await fetch(API.users.login, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-    if (response.ok) {
-      const result = await response.json();
-      localStorage.setItem("token", result.token);
-      navigate("/NewsPage");
-    } else {
-      toast.error("Неправильный никнейм или пароль");
-    }
+    dispatch(getTokenFunction({ data, navigate }));
   };
-  // console.log(data);
+  console.log(data);
   return (
     <div className={styles.container}>
       <div className={styles.forCentr}>
         <Link to="#">
-          <Logo className={styles.logo}/>
+          <Logo className={styles.logo} />
         </Link>
       </div>
       <div className={styles.nickEnt}>
@@ -99,16 +89,6 @@ function Login() {
               </InputAdornment>
             }
           />
-
-          {/* <TextField
-            id="outlined-passwordEnt"
-            type="password"
-            autoComplete="current-password"
-            size="small"
-            name="password"
-            value={data.password}
-            onChange={onChange}
-          /> */}
         </FormControl>
       </div>
       <div className={styles.forCentr}>
