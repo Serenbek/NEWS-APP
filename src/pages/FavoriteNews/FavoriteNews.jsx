@@ -7,30 +7,36 @@ import HeaderSecondVersion from "../../components/HeaderSecondVersion/HeaderSeco
 import Post from "../../components/Post/Post";
 import styles from "./FavoriteNews.module.css";
 import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { getMyLikeListFunction } from "../../Redux/newsSlice";
 
 function FavoriteNews() {
-  const token = localStorage.getItem("token");
-  const [likeList, setLikeList] = useState([]);
+  // const token = localStorage.getItem("token");
+  const token = useSelector((state) => state.token.token);
+  // const [likeList, setLikeList] = useState([]);
+  const likeList = useSelector((state) => state.news.likeList);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   useEffect(() => {
     if (!token) {
       navigate("/");
     } else {
-      getMyLikeList();
+      // getMyLikeList();
+      dispatch(getMyLikeListFunction({ token }));
     }
   }, []);
-  const getMyLikeList = async () => {
-    const response = await fetch(API.posts.likeList, {
-      method: "GET",
-      headers: {
-        Authorization: `Token ${localStorage.getItem("token")}`,
-      },
-    });
-    const list = await response.json();
-    if (list) {
-      setLikeList(list);
-    }
-  };
+  // const getMyLikeList = async () => {
+  //   const response = await fetch(API.posts.likeList, {
+  //     method: "GET",
+  //     headers: {
+  //       Authorization: `Token ${localStorage.getItem("token")}`,
+  //     },
+  //   });
+  //   const list = await response.json();
+  //   if (list) {
+  //     setLikeList(list);
+  //   }
+  // };
   const putLike = async (id) => {
     const response = await fetch(API.posts.likeList, {
       method: "POST",
@@ -43,7 +49,8 @@ function FavoriteNews() {
     const info = await response.json();
     console.log(info);
     if (info) {
-      getMyLikeList();
+      // getMyLikeList();
+      dispatch(getMyLikeListFunction({ token }));
       toast.success("Удалено из избранных");
     } else {
       toast.error("Неудалось удалить из избранных");

@@ -10,11 +10,11 @@ export const getTokenFunction = createAsyncThunk(
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ data }),
+      body: JSON.stringify(data),
     });
     if (response.ok) {
       const result = await response.json();
-      localStorage.getItem("token", result.token);
+      localStorage.setItem("token", result.token);
       navigate("/newsPage");
       dispatch(getTokenReducer(result.token));
     } else {

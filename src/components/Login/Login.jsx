@@ -16,10 +16,8 @@ import { getTokenFunction } from "../../Redux/tokenSlice";
 function Login() {
   const token = useSelector((state) => state.token.token);
   const dispatch = useDispatch();
-
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
-  // const token = localStorage.getItem("token");
   const navigate = useNavigate();
   useEffect(() => {
     if (token) {
@@ -43,7 +41,7 @@ function Login() {
     }
     dispatch(getTokenFunction({ data, navigate }));
   };
-  console.log(data);
+  // console.log(data);
   return (
     <div className={styles.container}>
       <div className={styles.forCentr}>

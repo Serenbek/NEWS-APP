@@ -13,51 +13,31 @@ import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import notIcon from "../../components/Post/images/notIconImage.png";
 import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { getSingleNewFunction } from "../../Redux/newsSlice";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 function SingleNew() {
+  const token = useSelector((state) => state.token.token);
   const { id } = useParams();
-  const token = localStorage.getItem("token");
+  const singleNew = useSelector((state) => state.news.singleNew);
+  const dispatch = useDispatch();
   const [commentText, setCommentText] = useState("");
   const [replyText, setReplyText] = useState({
     id: 0,
     text: "",
   });
   const [show, setShow] = useState(false);
-  const [singleNew, setsingleNew] = useState({
-    author: "",
-    comment: [],
-    id: "",
-    image: "",
-    is_liked: false,
-    short_desc: "",
-    tag: "",
-    text: "",
-    title: "",
-  });
   const navigate = useNavigate();
   useEffect(() => {
     if (!token) {
       navigate("/");
     } else {
-      getSengleNew();
+      dispatch(getSingleNewFunction({token, id}));
     }
   }, []);
 
-  const getSengleNew = async () => {
-    const response = await fetch(`${API.posts.newsList}${id}/`, {
-      method: "GET",
-      headers: {
-        Authorization: `Token ${localStorage.getItem("token")}`,
-      },
-    });
-    const list = await response.json();
-    if (list) {
-      setsingleNew(list);
-    }
-  };
-  console.log(singleNew);
   const postComment = async () => {
     const response = await fetch(API.comment.postComment, {
       method: "POST",
@@ -71,7 +51,7 @@ function SingleNew() {
     console.log(info);
     if (info) {
       setCommentText("");
-      getSengleNew();
+      dispatch(getSingleNewFunction({token, id}));
       toast.success("Комментарий успешно создан");
     } else {
       toast.error("Неудалось создать комментарий");
@@ -94,7 +74,7 @@ function SingleNew() {
     console.log(info);
     if (info) {
       setReplyText("");
-      getSengleNew();
+      dispatch(getSingleNewFunction({token, id}));
       toast.success("Ответ успешно добавлен");
     } else {
       toast.error("Неудалось добавить комментарий");

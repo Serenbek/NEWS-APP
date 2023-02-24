@@ -11,54 +11,24 @@ import Footer from "../../components/Footer/Footer";
 import { toast } from "react-toastify";
 import ReactPaginate from "react-paginate";
 import { useDispatch, useSelector } from "react-redux";
-import { getNewsListFunction } from "../../Redux/newsSlice";
+import { getNewsListFunction, getTagsListFunction } from "../../Redux/newsSlice";
 
 function NewsPage() {
-  // const token = localStorage.getItem("token");
   const token = useSelector((state) => state.token.token);
-  console.log(token);
-  // const [newsList, setNewsList] = useState([]);
+  // console.log(token);
   const newsList = useSelector((state) => state.news.newsList);
-  console.log(newsList);
-  const [tags, setTags] = useState([]);
+  const tags = useSelector((state) => state.news.tagsList);
+  // console.log(newsList);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
     if (!token) {
       navigate("/");
     } else {
-      // getAllNews();
       dispatch(getNewsListFunction({token}))
-      getAllTags();
+      dispatch(getTagsListFunction({token}));
     }
   }, []);
-
-  const getAllTags = async () => {
-    const response = await fetch(API.posts.tagList, {
-      method: "GET",
-      headers: {
-        Authorization: `Token ${token}`,
-      },
-    });
-    const list = await response.json();
-    if (list) {
-      setTags(list);
-    }
-  };
-
-  // const getAllNews = async () => {
-  //   const response = await fetch(API.posts.newsList, {
-  //     method: "GET",
-  //     headers: {
-  //       Authorization: `Token ${localStorage.getItem("token")}`,
-  //     },
-  //   });
-  //   const list = await response.json();
-  //   if (list) {
-  //     setNewsList(list);
-  //   }
-  // };
-  // console.log(newsList);
 
   const putLike = async (id) => {
     const response = await fetch(API.posts.likeList, {
@@ -70,7 +40,7 @@ function NewsPage() {
       body: JSON.stringify({ post: id }),
     });
     const info = await response.json();
-    console.log(info);
+    // console.log(info);
     if (info) {
       toast.success("Добавлено в избранные");
     } else {
